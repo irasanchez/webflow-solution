@@ -1,35 +1,36 @@
 import React from "react";
-import logo from "./logo.svg";
 import { gql } from "apollo-boost";
 import { Query } from "react-apollo";
+import CMS from "./components/CMS";
+import Slider from "./components/Slider";
 import "./App.css";
 // FF6382 pink and black
 
-const GET_PHOTOS = gql`
-  query Photos($id: ID = 5) {
-    photo(id: $id) {
-      album {
+const GET_CHARS = gql`
+  {
+    characters {
+      results {
         id
-        photos {
-          data {
-            url
-          }
-        }
+        name
+        image
       }
     }
   }
 `;
 
 function App() {
-  console.log(GET_PHOTOS.definitions[0].selectionSet.selections[0]);
   return (
-    <Query query={GET_PHOTOS}>
+    <Query query={GET_CHARS}>
       {({ data, loading, error }) => {
         if (loading) return <div>Loading...</div>;
-        if (error) return <div>Error :(</div>;
+        if (error) return <div>Error :( {error}</div>;
 
-        const photos = data.photo.album.photos.data;
-        return <div className="App">{JSON.stringify(photos)}</div>;
+        return (
+          <div className="App">
+            <CMS />
+            <Slider characters={data} />
+          </div>
+        );
       }}
     </Query>
   );

@@ -6,7 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 
-const client = new ApolloClient({ uri: "https://graphqlzero.almansi.me/api" });
+const client = new ApolloClient({ uri: "https://rickandmortyapi.com/graphql" });
 
 const ApolloApp = (AppComponent) => (
   <ApolloProvider client={client}>
