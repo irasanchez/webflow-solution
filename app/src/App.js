@@ -28,7 +28,7 @@ function App() {
         return (
           <div className="App">
             <CMS />
-            <Slider characters={data} />
+            <Slider characters={data.characters.results} />
           </div>
         );
       }}
